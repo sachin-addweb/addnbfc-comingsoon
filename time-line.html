@@ -156,7 +156,7 @@
          window.addEventListener('load', setPaddingBasedOnPosition);
          window.addEventListener('resize', setPaddingBasedOnPosition);    
          
-         const slider = document.querySelector(".emptesti-time-line");
+const slider = document.querySelector(".emptesti-time-line");
 let isDown = false;
 let startX;
 let scrollLeft;
@@ -167,21 +167,43 @@ slider.addEventListener("mousedown", (e) => {
   startX = e.pageX - slider.offsetLeft;
   scrollLeft = slider.scrollLeft;
 });
+
+slider.addEventListener("touchstart", (e) => {
+  isDown = true;
+  slider.classList.add("active");
+  startX = e.touches[0].pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+});
+
 slider.addEventListener("mouseleave", () => {
   isDown = false;
   slider.classList.remove("active");
 });
+
 slider.addEventListener("mouseup", () => {
   isDown = false;
   slider.classList.remove("active");
 });
+
+slider.addEventListener("touchend", () => {
+  isDown = false;
+  slider.classList.remove("active");
+});
+
 slider.addEventListener("mousemove", (e) => {
   if (!isDown) return;
   e.preventDefault();
   const x = e.pageX - slider.offsetLeft;
   const walk = (x - startX) * 3; //scroll-fast
   slider.scrollLeft = scrollLeft - walk;
-  console.log(walk);
+});
+
+slider.addEventListener("touchmove", (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.touches[0].pageX - slider.offsetLeft;
+  const walk = (x - startX) * 3; //scroll-fast
+  slider.scrollLeft = scrollLeft - walk;
 });
 
       </script>

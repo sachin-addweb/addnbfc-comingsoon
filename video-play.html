@@ -138,7 +138,6 @@
 
 <script>
 
-
 var Swipes = new Swiper('.swiper-container', {
     loop: false,
     navigation: {
@@ -163,8 +162,8 @@ var Swipes = new Swiper('.swiper-container', {
    playButtons.forEach((button, index) => {
       button.addEventListener('click', () => {
          // Toggle the "d-none" class on the play button's parent
-         customPlayDivs[index].classList.toggle('d-none');
-
+         // customPlayDivs[index].classList.toggle('d-none');
+         customPlayDivs[index].classList.toggle('opacity-0');
          // Play the corresponding video
          videos[index].play();
       });
@@ -214,9 +213,11 @@ var Swipes = new Swiper('.swiper-container', {
    function showAllCustomPlayDivs() {
 
       customPlayDivs.forEach(div => {
-         div.classList.remove('d-none');
+         // div.classList.remove('d-none');
+         div.classList.remove('opacity-0');
       });
    }
+
 
 
 </script>

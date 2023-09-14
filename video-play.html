@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.css"  rel="stylesheet" type="text/css">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
 
@@ -23,20 +24,20 @@
     .video::-webkit-media-controls {
         display: none !important; /* Safari and newer Chrome */
     }
-    
+
     .video::-webkit-media-controls-enclosure {
         display: none !important; /* Older Chrome */
     }
-    
+
     .video::-webkit-media-controls-panel {
         display: none !important; /* Older Chrome */
     }
-    
+
     /* Hide Firefox controls */
     .video::-moz-media-controls {
         display: none !important;
     }
-    
+
     /* Hide Edge controls */
     .video::-ms-media-controls {
         display: none !important;
@@ -52,43 +53,65 @@
       width: 100%;
       height: 100%;
       cursor: pointer;
+      z-index: 2;
+    }
+
+    .custom-stop
+    {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      z-index: 1;
     }
 
     .swiper-slide
     {
       position: relative;
     }
+
+
 </style>
 
 </head>
 <body>
-  
+
   <div class="swiper-container">
    <!-- swiper slides -->
    <div class="swiper-wrapper">
       <div class="swiper-slide" >
          <div class="custom-play">
          </div>
+ <div class="custom-stop">
+         </div>
          <video class="video w-100" controls preload="metadata" >
             <source src="https://silverfortndev.wpengine.com/wp-content/uploads/2023/09/Hed_Final_SUB_lowres.mp4" type="video/mp4">
          </video>
       </div>
       <div class="swiper-slide">
-         <div class="custom-play">
+      <div class="custom-play">
+         </div>
+ <div class="custom-stop">
          </div>
          <video class="video w-100" controls preload="metadata" >
             <source src="https://silverfortndev.wpengine.com/wp-content/uploads/2023/09/Hed_Final_SUB_lowres.mp4" type="video/mp4">
          </video>
       </div>
          <div class="swiper-slide">
-         <div class="custom-play">
+     <div class="custom-play">
+         </div>
+ <div class="custom-stop">
          </div>
          <video class="video w-100" controls preload="metadata" >
             <source src="https://silverfortndev.wpengine.com/wp-content/uploads/2023/09/Hed_Final_SUB_lowres.mp4" type="video/mp4">
          </video>
       </div>
          <div class="swiper-slide">
-         <div class="custom-play">
+  <div class="custom-play">
+         </div>
+ <div class="custom-stop">
          </div>
          <video class="video w-100" controls preload="metadata" >
             <source src="https://silverfortndev.wpengine.com/wp-content/uploads/2023/09/Hed_Final_SUB_lowres.mp4" type="video/mp4">
@@ -129,8 +152,10 @@ var Swipes = new Swiper('.swiper-container', {
 
 
 
+
  // Get all the play buttons and videos
    const playButtons = document.querySelectorAll('.custom-play');
+      const stopButtons = document.querySelectorAll('.custom-stop');
    const videos = document.querySelectorAll('.video');
    const customPlayDivs = document.querySelectorAll('.custom-play');
 
@@ -145,6 +170,20 @@ var Swipes = new Swiper('.swiper-container', {
       });
    });
 
+
+      stopButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+         // Toggle the "d-none" class on the play button's parent
+ 
+      showAllCustomPlayDivs();
+         // Play the corresponding video
+      stopAllVideos();
+      });
+   });
+
+
+
+ 
    // Get next and previous buttons
    const nextButton = document.querySelector('.swiper-button-next');
    const prevButton = document.querySelector('.swiper-button-prev');
@@ -159,6 +198,10 @@ var Swipes = new Swiper('.swiper-container', {
       showAllCustomPlayDivs();
    });
 
+
+
+
+
    // Function to stop all videos
    function stopAllVideos() {
       videos.forEach(video => {
@@ -169,10 +212,13 @@ var Swipes = new Swiper('.swiper-container', {
 
    // Function to remove "d-none" class from all custom-play divs
    function showAllCustomPlayDivs() {
+
       customPlayDivs.forEach(div => {
          div.classList.remove('d-none');
       });
    }
+
+
 </script>
 </body>
 </html>

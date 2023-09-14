@@ -70,28 +70,28 @@
          <div class="custom-play">
          </div>
          <video class="video w-100" controls preload="metadata" >
-            <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+            <source src="https://comingsoonhtml.netlify.app/movie.mp4" type="video/mp4">
          </video>
       </div>
       <div class="swiper-slide">
          <div class="custom-play">
          </div>
          <video class="video  w-100" controls preload="metadata" >
-            <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+            <source src="https://comingsoonhtml.netlify.app/movie.mp4" type="video/mp4">
          </video>
       </div>
          <div class="swiper-slide">
          <div class="custom-play">
          </div>
          <video class="video  w-100" controls preload="metadata" >
-            <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+            <source src="https://comingsoonhtml.netlify.app/movie.mp4" type="video/mp4">
          </video>
       </div>
          <div class="swiper-slide">
          <div class="custom-play">
          </div>
          <video class="video  w-100" controls preload="metadata" >
-            <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+            <source src="https://comingsoonhtml.netlify.app/movie.mp4" type="video/mp4">
          </video>
       </div>
    </div>
@@ -128,39 +128,44 @@ var Swipes = new Swiper('.swiper-container', {
 });
 
 
-const videoContainer = document.querySelectorAll('.video-container');
 
-videoContainer.forEach(container => {
-   const playButton = container.querySelector('.custom-play');
-   const video = container.querySelector('.video');
+ // Get all the play buttons and videos
+   const playButtons = document.querySelectorAll('.custom-play');
+   const videos = document.querySelectorAll('.video');
+   const customPlayDivs = document.querySelectorAll('.custom-play');
 
-   playButton.addEventListener('click', () => {
-      // Toggle the "d-none" class on the play button's parent
-      container.classList.toggle('d-none');
+   // Add click event listeners to play buttons
+   playButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+         // Toggle the "d-none" class on the play button's parent
+         customPlayDivs[index].classList.toggle('d-none');
 
-      // Play the corresponding video
-      video.play();
+         // Play the corresponding video
+         videos[index].play();
+      });
    });
-});
 
+   // Get next and previous buttons
+   const nextButton = document.querySelector('.swiper-button-next');
+   const prevButton = document.querySelector('.swiper-button-prev');
 
-function stopAllVideos() {
-   videos.forEach(video => {
-      video.pause();
+   // Add click event listeners to next and previous buttons
+   nextButton.addEventListener('click', () => {
+      stopAllVideos();
+      showAllCustomPlayDivs();
    });
-}
+   prevButton.addEventListener('click', () => {
+      stopAllVideos();
+      showAllCustomPlayDivs();
+   });
 
-
-videos.forEach(video => {
-   if (video.canPlayType('video/mp4')) {
-      // Play the video
-      video.play();
-   } else {
-      console.error('Video format not supported.');
+   // Function to stop all videos
+   function stopAllVideos() {
+      videos.forEach(video => {
+         video.pause();
+         video.currentTime = 0;
+      });
    }
-});
-
-
 
    // Function to remove "d-none" class from all custom-play divs
    function showAllCustomPlayDivs() {

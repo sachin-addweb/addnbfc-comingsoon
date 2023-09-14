@@ -138,6 +138,7 @@
 
 <script>
 
+
 var Swipes = new Swiper('.swiper-container', {
     loop: false,
     navigation: {
@@ -162,8 +163,8 @@ var Swipes = new Swiper('.swiper-container', {
    playButtons.forEach((button, index) => {
       button.addEventListener('click', () => {
          // Toggle the "d-none" class on the play button's parent
-         // customPlayDivs[index].classList.toggle('d-none');
-         customPlayDivs[index].classList.toggle('opacity-0');
+         customPlayDivs[index].classList.toggle('d-none');
+
          // Play the corresponding video
          videos[index].play();
       });
@@ -176,7 +177,7 @@ var Swipes = new Swiper('.swiper-container', {
  
       showAllCustomPlayDivs();
          // Play the corresponding video
-      stopAllVideos();
+pauseAllVideos();
       });
    });
 
@@ -209,15 +210,22 @@ var Swipes = new Swiper('.swiper-container', {
       });
    }
 
+
+   // Function to pause all videos
+   function pauseAllVideos() {
+      videos.forEach(video => {
+         video.pause();
+
+      });
+   }
+
    // Function to remove "d-none" class from all custom-play divs
    function showAllCustomPlayDivs() {
 
       customPlayDivs.forEach(div => {
-         // div.classList.remove('d-none');
-         div.classList.remove('opacity-0');
+         div.classList.remove('d-none');
       });
    }
-
 
 
 </script>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Bootstrap 5 Template</title>
+  <!-- Favicons -->
+  <link rel="icon" href="assets/images/favicon.png">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.css"  rel="stylesheet" type="text/css">
+
+<style>
+
+    .video
+    {
+      width: 800px;
+      height: 500px;
+    }
+    .video::-webkit-media-controls {
+        display: none !important; /* Safari and newer Chrome */
+    }
+    
+    .video::-webkit-media-controls-enclosure {
+        display: none !important; /* Older Chrome */
+    }
+    
+    .video::-webkit-media-controls-panel {
+        display: none !important; /* Older Chrome */
+    }
+    
+    /* Hide Firefox controls */
+    .video::-moz-media-controls {
+        display: none !important;
+    }
+    
+    /* Hide Edge controls */
+    .video::-ms-media-controls {
+        display: none !important;
+    }
+
+
+    .custom-play
+    {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: RGBA(17,97,99,0.8);
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .swiper-slide
+    {
+      position: relative;
+    }
+</style>
+
+</head>
+<body>
+  
+  <div class="swiper-container">
+   <!-- swiper slides -->
+   <div class="swiper-wrapper">
+      <div class="swiper-slide" >
+         <div class="custom-play">
+         </div>
+         <video class="video w-100" controls preload="metadata" >
+            <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+         </video>
+      </div>
+      <div class="swiper-slide">
+         <div class="custom-play">
+         </div>
+         <video class="video  w-100" controls preload="metadata" >
+            <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+         </video>
+      </div>
+         <div class="swiper-slide">
+         <div class="custom-play">
+         </div>
+         <video class="video  w-100" controls preload="metadata" >
+            <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+         </video>
+      </div>
+         <div class="swiper-slide">
+         <div class="custom-play">
+         </div>
+         <video class="video  w-100" controls preload="metadata" >
+            <source src="https://www.w3schools.com/tags/movie.mp4" type="video/mp4">
+         </video>
+      </div>
+   </div>
+   <!-- !swiper slides -->
+   <!-- next / prev arrows -->
+   <div class="swiper-button-next"></div>
+   <div class="swiper-button-prev"></div>
+   <!-- !next / prev arrows -->
+   <!-- pagination dots -->
+   <div class="swiper-pagination"></div>
+   <!-- !pagination dots -->
+</div>
+
+
+
+  <!-- build:js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.js"></script>
+  <!-- endbuild -->
+
+
+
+<script>
+
+
+var Swipes = new Swiper('.swiper-container', {
+    loop: false,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper-pagination',
+    },
+});
+
+
+
+ // Get all the play buttons and videos
+   const playButtons = document.querySelectorAll('.custom-play');
+   const videos = document.querySelectorAll('.video');
+   const customPlayDivs = document.querySelectorAll('.custom-play');
+
+   // Add click event listeners to play buttons
+   playButtons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+         // Toggle the "d-none" class on the play button's parent
+         customPlayDivs[index].classList.toggle('d-none');
+
+         // Play the corresponding video
+         videos[index].play();
+      });
+   });
+
+   // Get next and previous buttons
+   const nextButton = document.querySelector('.swiper-button-next');
+   const prevButton = document.querySelector('.swiper-button-prev');
+
+   // Add click event listeners to next and previous buttons
+   nextButton.addEventListener('click', () => {
+      stopAllVideos();
+      showAllCustomPlayDivs();
+   });
+   prevButton.addEventListener('click', () => {
+      stopAllVideos();
+      showAllCustomPlayDivs();
+   });
+
+   // Function to stop all videos
+   function stopAllVideos() {
+      videos.forEach(video => {
+         video.pause();
+         video.currentTime = 0;
+      });
+   }
+
+   // Function to remove "d-none" class from all custom-play divs
+   function showAllCustomPlayDivs() {
+      customPlayDivs.forEach(div => {
+         div.classList.remove('d-none');
+      });
+   }
+</script>
+</body>
+</html>

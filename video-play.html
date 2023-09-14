@@ -128,44 +128,39 @@ var Swipes = new Swiper('.swiper-container', {
 });
 
 
+const videoContainer = document.querySelectorAll('.video-container');
 
- // Get all the play buttons and videos
-   const playButtons = document.querySelectorAll('.custom-play');
-   const videos = document.querySelectorAll('.video');
-   const customPlayDivs = document.querySelectorAll('.custom-play');
+videoContainer.forEach(container => {
+   const playButton = container.querySelector('.custom-play');
+   const video = container.querySelector('.video');
 
-   // Add click event listeners to play buttons
-   playButtons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-         // Toggle the "d-none" class on the play button's parent
-         customPlayDivs[index].classList.toggle('d-none');
+   playButton.addEventListener('click', () => {
+      // Toggle the "d-none" class on the play button's parent
+      container.classList.toggle('d-none');
 
-         // Play the corresponding video
-         videos[index].play();
-      });
+      // Play the corresponding video
+      video.play();
    });
+});
 
-   // Get next and previous buttons
-   const nextButton = document.querySelector('.swiper-button-next');
-   const prevButton = document.querySelector('.swiper-button-prev');
 
-   // Add click event listeners to next and previous buttons
-   nextButton.addEventListener('click', () => {
-      stopAllVideos();
-      showAllCustomPlayDivs();
+function stopAllVideos() {
+   videos.forEach(video => {
+      video.pause();
    });
-   prevButton.addEventListener('click', () => {
-      stopAllVideos();
-      showAllCustomPlayDivs();
-   });
+}
 
-   // Function to stop all videos
-   function stopAllVideos() {
-      videos.forEach(video => {
-         video.pause();
-         video.currentTime = 0;
-      });
+
+videos.forEach(video => {
+   if (video.canPlayType('video/mp4')) {
+      // Play the video
+      video.play();
+   } else {
+      console.error('Video format not supported.');
    }
+});
+
+
 
    // Function to remove "d-none" class from all custom-play divs
    function showAllCustomPlayDivs() {
